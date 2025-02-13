@@ -1,8 +1,5 @@
 enum Direction {
-  Up = 'up',
-  Down = 'down',
-  Left = 'left',
-  Right = 'right',
+  Up, Down, Left, Right
 }
 
 export default class Game {

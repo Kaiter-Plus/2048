@@ -171,7 +171,7 @@ export default class Game {
       for (let j = 0; j < 4; j++) {
         const cell = document.createElement('div')
         cell.className = 'cell'
-        cell.textContent = `${this.board[i][j]}` || ''
+        cell.textContent = `${this.board[i][j] || ''}`
         board.appendChild(cell)
       }
     }

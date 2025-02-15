@@ -167,7 +167,7 @@ export default class Game {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         const cell = document.createElement('div')
-        cell.className = 'cell'
+        cell.className = `cell cell-${this.board[i][j] || ''}`
         cell.textContent = `${this.board[i][j] || ''}`
         board.appendChild(cell)
       }

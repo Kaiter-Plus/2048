@@ -3,12 +3,17 @@
   flex-direction: column;
   align-items: center;
 }
+
 .board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   margin: 20px;
+  background: #bbada0;
+  border-radius: 5px;
+  padding: 10px;
 }
+
 .cell {
   width: 80px;
   height: 80px;
@@ -18,8 +23,56 @@
   align-items: center;
   font-size: 24px;
   font-weight: bold;
+  border-radius: 3px;
 }
+
 .score {
   font-size: 24px;
   margin-bottom: 20px;
+}
+
+/* cell colors */
+.cell-2 {
+  background: #eee4da;
+  color: #776e65;
+}
+.cell-4 {
+  background: #ede0c8;
+  color: #776e65;
+}
+.cell-8 {
+  background: #f2b179;
+  color: #f9f6f2;
+}
+.cell-16 {
+  background: #f59563;
+  color: #f9f6f2;
+}
+.cell-32 {
+  background: #f67c5f;
+  color: #f9f6f2;
+}
+.cell-64 {
+  background: #f65e3b;
+  color: #f9f6f2;
+}
+.cell-128 {
+  background: #edcf72;
+  color: #f9f6f2;
+}
+.cell-256 {
+  background: #edcc61;
+  color: #f9f6f2;
+}
+.cell-512 {
+  background: #edc850;
+  color: #f9f6f2;
+}
+.cell-1024 {
+  background: #edc53f;
+  color: #f9f6f2;
+}
+.cell-2048 {
+  background: #edc22e;
+  color: #f9f6f2;
 }

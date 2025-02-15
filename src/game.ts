@@ -1,32 +1,9 @@
 enum Direction {
-  Up = 'up',
-  Down = 'down',
-  Left = 'left',
-  Right = 'right',
-}
-
-const SIZE = 80
-
-class Cell {
-  row: number
-  col: number
-  value: number
-  merged: boolean
-  x: number
-  y: number
-
-  constructor(row: number, col: number, value: number) {
-    this.row = row
-    this.col = col
-    this.value = value
-    this.x = col * SIZE
-    this.y = row * SIZE
-    this.merged = false
-  }
+  Up, Down, Left, Right
 }
 
 export default class Game {
-  board: Array<Array<Cell | null>>
+  board: number[][]
   score: number
 
   constructor() {
@@ -40,18 +17,9 @@ export default class Game {
   }
 
   initBoard() {
-    /**
-     * 构建初始棋盘
-     * [
-     *   [null, null, null, null],
-     *   [null, null, null, null],
-     *   [null, null, null, null],
-     *   [null, null, null, null]
-     * ]
-     */
     this.board = Array(4)
       .fill(null)
-      .map(() => Array(4).fill(null))
+      .map(() => Array(4).fill(0))
   }
 
   addNewNumber() {
@@ -59,7 +27,7 @@ export default class Game {
     // 获取当前空白格子的位置
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
-        if (this.board[i][j] === null) {
+        if (this.board[i][j] === 0) {
           emptyCells.push({ x: i, y: j })
         }
       }
@@ -69,7 +37,7 @@ export default class Game {
       // 随机选择一个空白格子
       const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
       // 随机添加数字 2 或者 4
-      this.board[randomCell.x][randomCell.y] = Math.random() < 0.9 ? new Cell(randomCell.x, randomCell.y, 2) : new Cell(randomCell.x, randomCell.y, 4)
+      this.board[randomCell.x][randomCell.y] = Math.random() < 0.9 ? 2 : 4
     }
   }
 
@@ -84,14 +52,13 @@ export default class Game {
       case Direction.Left:
         for (let i = 0; i < 4; i++) {
           // 在行中找到格子内不为 0 的
-          let row = this.board[i].filter(cell => cell !== null)
+          let row = this.board[i].filter(cell => cell !== 0)
           for (let j = 0; j < row.length - 1; j++) {
             // 如果当前格子和下一个格子相等，合并到当前格子，同时删除下一个格子
-            if (row[j].value === row[j + 1].value) {
-              row[j].value *= 2
-              row[j].merged = true
+            if (row[j] === row[j + 1]) {
+              row[j] *= 2
               // 增加分数
-              this.score += row[j].value
+              this.score += row[j]
               // 删除下一个格子
               row.splice(j + 1, 1)
               // 标记已经移动
@@ -99,7 +66,7 @@ export default class Game {
             }
           }
           // 如果移动了，在格子后面补 0
-          const newRow = row.concat(Array(4 - row.length).fill(null))
+          const newRow = row.concat(Array(4 - row.length).fill(0))
           // 如果移动后的格子和原来的格子不同，标记已经移动
           if (newRow.join(',') !== this.board[i].join(',')) moved = true
           // 更新棋盘
@@ -108,18 +75,17 @@ export default class Game {
         break
       case Direction.Right:
         for (let i = 0; i < 4; i++) {
-          let row = this.board[i].filter(cell => cell !== null)
+          let row = this.board[i].filter(cell => cell !== 0)
           for (let j = row.length - 1; j > 0; j--) {
-            if (row[j].value === row[j - 1].value) {
-              row[j].value *= 2
-              row[j].merged = true
-              this.score += row[j].value
+            if (row[j] === row[j - 1]) {
+              row[j] *= 2
+              this.score += row[j]
               row.splice(j - 1, 1)
               moved = true
             }
           }
           const newRow = Array(4 - row.length)
-            .fill(null)
+            .fill(0)
             .concat(row)
           if (newRow.join(',') !== this.board[i].join(',')) moved = true
           newBoard[i] = newRow
@@ -128,17 +94,16 @@ export default class Game {
       case Direction.Up:
         for (let j = 0; j < 4; j++) {
           // 在列中找到格子内不为 0 的
-          let col = this.board.map(row => row[j]).filter(cell => cell !== null)
+          let col = this.board.map(row => row[j]).filter(cell => cell !== 0)
           for (let i = 0; i < col.length - 1; i++) {
-            if (col[i].value === col[i + 1].value) {
-              col[i].value *= 2
-              col[i].merged = true
-              this.score += col[i].value
+            if (col[i] === col[i + 1]) {
+              col[i] *= 2
+              this.score += col[i]
               col.splice(i + 1, 1)
               moved = true
             }
           }
-          const newCol = col.concat(Array(4 - col.length).fill(null))
+          const newCol = col.concat(Array(4 - col.length).fill(0))
           if (newCol.join(',') !== this.board.map(row => row[j]).join(',')) moved = true
           for (let i = 0; i < 4; i++) {
             newBoard[i][j] = newCol[i]
@@ -147,18 +112,17 @@ export default class Game {
         break
       case Direction.Down:
         for (let j = 0; j < 4; j++) {
-          let col = this.board.map(row => row[j]).filter(cell => cell !== null)
+          let col = this.board.map(row => row[j]).filter(cell => cell !== 0)
           for (let i = col.length - 1; i > 0; i--) {
-            if (col[i].value === col[i - 1].value) {
-              col[i].value *= 2
-              col[i].merged = true
-              this.score += col[i].value
+            if (col[i] === col[i - 1]) {
+              col[i] *= 2
+              this.score += col[i]
               col.splice(i - 1, 1)
               moved = true
             }
           }
           const newCol = Array(4 - col.length)
-            .fill(null)
+            .fill(0)
             .concat(col)
           if (newCol.join(',') !== this.board.map(row => row[j]).join(',')) moved = true
           for (let i = 0; i < 4; i++) {
@@ -170,17 +134,7 @@ export default class Game {
 
     // 如果已经移动了，更新棋盘
     if (moved) {
-      // 更新格子的位置
-      newBoard.forEach((row, i) => {
-        row.forEach((cell, j) => {
-          if (cell) {
-            cell.row = i
-            cell.col = j
-          }
-        })
-      })
       this.board = newBoard
-      console.log(this.board)
       // 添加新的数字
       this.addNewNumber()
       // 更新视图
@@ -196,7 +150,7 @@ export default class Game {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         // 如果有格子为 0，说明游戏没有结束
-        if (this.board[i][j] === null) return false
+        if (this.board[i][j] === 0) return false
         // 如果有格子和它右边或者下边的格子相等，说明游戏没有结束
         if (i < 3 && this.board[i][j] === this.board[i + 1][j]) return false
         if (j < 3 && this.board[i][j] === this.board[i][j + 1]) return false
@@ -214,7 +168,7 @@ export default class Game {
       for (let j = 0; j < 4; j++) {
         const cell = document.createElement('div')
         cell.className = 'cell'
-        cell.textContent = `${this.board[i][j]?.value || ''}`
+        cell.textContent = `${this.board[i][j] || ''}`
         board.appendChild(cell)
       }
     }

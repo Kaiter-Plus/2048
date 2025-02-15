@@ -76,3 +76,87 @@
   background: #edc22e;
   color: #f9f6f2;
 }
+.cell-4096 {
+  background: #7ae0c8;
+  color: #f9f6f2;
+}
+.cell-8192 {
+  background: #6acbde;
+  color: #f9f6f2;
+}
+.cell-16384 {
+  background: #5ab6f4;
+  color: #f9f6f2;
+}
+.cell-32768 {
+  background: #4aa1ff;
+  color: #f9f6f2;
+}
+.cell-65536 {
+  background: #8d7cff;
+  color: #f9f6f2;
+}
+.cell-131072 {
+  background: #c25eff;
+  color: #f9f6f2;
+}
+.cell-262144 {
+  background: #ff40d9;
+  color: #f9f6f2;
+}
+.cell-524288 {
+  background: #ff6b8a;
+  color: #f9f6f2;
+}
+.cell-1048576 {
+  background: #a1d36e;
+  color: #f9f6f2;
+}
+.cell-2097152 {
+  background: #6ed3b0;
+  color: #f9f6f2;
+}
+.cell-4194304 {
+  background: #5eb5d9;
+  color: #f9f6f2;
+}
+.cell-8388608 {
+  background: #b380ff;
+  color: #f9f6f2;
+}
+.cell-16777216 {
+  background: #ff66cc;
+  color: #f9f6f2;
+}
+.cell-33554432 {
+  background: #66ffd9;
+  color: #f9f6f2;
+}
+.cell-67108864 {
+  background: #ffad66;
+  color: #f9f6f2;
+}
+.cell-134217728 {
+  background: #9f94ff;
+  color: #f9f6f2;
+}
+.cell-268435456 {
+  background: #7affb3;
+  color: #f9f6f2;
+}
+.cell-536870912 {
+  background: #ff99eb;
+  color: #f9f6f2;
+}
+.cell-1073741824 {
+  background: #85e6ff;
+  color: #f9f6f2;
+}
+.cell-2147483648 {
+  background: #d966ff;
+  color: #f9f6f2;
+}
+.cell-4294967296 {
+  background: #66ff99;
+  color: #f9f6f2;
+}

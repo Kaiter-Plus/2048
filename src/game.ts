@@ -167,8 +167,12 @@ export default class Game {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         const cell = document.createElement('div')
-        cell.className = `cell cell-${this.board[i][j] || ''}`
-        cell.textContent = `${this.board[i][j] || ''}`
+        const cellNumber: number = this.board[i][j]
+        if (String(cellNumber).length > 5) {
+          cell.style.fontSize = `${12 + (10 - String(cellNumber).length)}px`
+        }
+        cell.className = `cell cell-${cellNumber || ''}`
+        cell.textContent = `${cellNumber || ''}`
         board.appendChild(cell)
       }
     }
